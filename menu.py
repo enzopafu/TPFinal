@@ -13,6 +13,7 @@ class Menu:
     def __init__(self):
         self.lista_clientes = ListaClientes()
         self.repoc = RepositorioClientes()
+        self.repot = RepositorioTrabajos()
         self.l_t = ListaTrabajos()
         self.opciones = {
             "1": self.mostrar_clientes,
@@ -20,6 +21,7 @@ class Menu:
             "3": self.modificar_cliente,
             "4": self.eliminar_cliente,
             "5": self.nuevo_trabajo,
+
             "0": self.salir
         }
     def mostrar_menu(self):
@@ -30,6 +32,7 @@ Menú de la agenda:
 3. modificar cliente
 4. eliminar cliente
 5. cargar nuevo trabajo
+6. registrar trabajo finalizado
 0. Salir
 """)
 
@@ -52,6 +55,7 @@ Menú de la agenda:
             print("___________________________________________________")
 
     def nuevo_cliente(self):
+        """Solicita los datos del cliente nuevo y lo agrega a la lista"""
         tipo = "A"
         while tipo not in ("c", "C", "p", "P"):
             tipo = input("ingrese el tipo de cliente: C=Corporativo/P=Particular")
@@ -109,21 +113,22 @@ Menú de la agenda:
             print("contacto eliminado")
 
     def nuevo_trabajo(self):
-
-        """cliente, fecha_ingreso, fecha_entrega_propuesta, descripción"""""
+        """crea nuevo trabajo asignado al cliente correspondiente"""""
         id_cliente = int(input("ingrese el id del cliente que desea cargar: "))
-        c = self.repoc.get_one(id_cliente)
+        r = self.repoc.get_one(id_cliente)
         fecha_ingreso = datetime.date.today()
         dia = int(input("ingrese el dia de la entrega: "))
         mes = int(input("ingrese el mes de la entrega: "))
         anio = int(input("ingrese el año de la entrega: "))
         fecha_entrega_propuesta = datetime.date(anio, mes, dia)
         descripcion = input("ingrese las tareas realizadas: ")
-        c= self.l_t.nuevo_trabajo(c, fecha_ingreso, fecha_entrega_propuesta, descripcion)
+        c= self.l_t.nuevo_trabajo(r, fecha_ingreso, fecha_entrega_propuesta, descripcion)
         if c == None:
             print("el trabajo no se cargo")
         else:
             print("trabajo cargado")
+    
+
 
 
     def salir(self):
