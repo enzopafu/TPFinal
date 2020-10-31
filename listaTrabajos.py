@@ -13,6 +13,7 @@ class ListaTrabajos:
         self.lista_t = self.rt.get_all()
 
     def nuevo_trabajo(self, cliente, fecha_ingreso, fecha_entrega_propuesta, descripcion):
+        """Crea un nuevo objeto trabajo y lo agrega a la lista"""
         t = Trabajo(cliente, fecha_ingreso, fecha_entrega_propuesta, None, descripcion, False)
         t.id_trabajo = self.rt.store(t)
         if t.id_trabajo == 0:

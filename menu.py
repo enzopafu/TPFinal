@@ -128,17 +128,20 @@ Menú de la agenda:
         """crea nuevo trabajo asignado al cliente correspondiente"""""
         id_cliente = int(input("ingrese el id del cliente que desea cargar: "))
         r = self.repoc.get_one(id_cliente)
-        fecha_ingreso = datetime.date.today()
-        dia = int(input("ingrese el dia de la entrega: "))
-        mes = int(input("ingrese el mes de la entrega: "))
-        anio = int(input("ingrese el año de la entrega: "))
-        fecha_entrega_propuesta = datetime.date(anio, mes, dia)
-        descripcion = input("ingrese las tareas realizadas: ")
-        c= self.l_t.nuevo_trabajo(r, fecha_ingreso, fecha_entrega_propuesta, descripcion)
-        if c == None:
-            print("el trabajo no se cargo")
+        if r == None:
+            print("el id es inexistente")
         else:
-            print("trabajo cargado")
+            fecha_ingreso = datetime.date.today()
+            dia = int(input("ingrese el dia de la entrega: "))
+            mes = int(input("ingrese el mes de la entrega: "))
+            anio = int(input("ingrese el año de la entrega: "))
+            fecha_entrega_propuesta = datetime.date(anio, mes, dia)
+            descripcion = input("ingrese las tareas realizadas: ")
+            c= self.l_t.nuevo_trabajo(r, fecha_ingreso, fecha_entrega_propuesta, descripcion)
+            if c == None:
+                print("el trabajo no se cargo")
+            else:
+                print("trabajo cargado")
 
     def mostrar_trabajos(self, lista=None ):
         """muestra los trabajo asignado a los cliente correspondiente"""""
@@ -149,6 +152,7 @@ Menú de la agenda:
             print("___________________________________________________")
 
     def finalizar_trabajo(self):
+        """introduce la fecha que se termino el trabajo"""
         id_trabajo = int(input("ingrese el id del trabajo que desea finalizar: "))
         x = self.repot.get_one(id_trabajo)
         self.l_t.finalizar_trabajo(id_trabajo)
@@ -158,6 +162,7 @@ Menú de la agenda:
             print("trabajo no finalizado")
 
     def retiro_trabajo(self):
+        """describe si el cliente retiro el trabajo realizado"""
         id_trabajo = int(input("ingrese el id del trabajo que desea finalizar: "))
         x = self.repot.get_one(id_trabajo)
         self.l_t.retiro_trabajo(id_trabajo)
@@ -167,6 +172,7 @@ Menú de la agenda:
             print("trabajo no retirado")
 
     def eliminar_trabajo(self):
+        """elimina un trabajo en caso de ser cancelado"""
         id_trabajo = int(input("ingrese el id del trabajo"))
         c = self.repot.get_one(id_trabajo)
         if c == None:
@@ -177,6 +183,7 @@ Menú de la agenda:
             print("trabajo eliminado")
 
     def informe(self):
+        """realiza un informe de todos los trabajo que tenga un cliente"""
         id_cliente = int(input("ingrese el id del cliente que desea ver su historial: "))
         c = self.repoc.get_one(id_cliente)
         if c == None:
@@ -186,6 +193,7 @@ Menú de la agenda:
                 if t.cliente.id_cliente == id_cliente:
                    print (t)
     def modificar_trabajo(self):
+        """modifica un trabajo"""
         id_trabajo = int(input("ingrese el id del trabajo"))
         c = self.repot.get_one(id_trabajo)
         if c == None:
