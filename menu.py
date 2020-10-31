@@ -13,7 +13,8 @@ class Menu:
         self.opciones = {
             "1": self.mostrar_clientes,
             "2": self.nuevo_cliente,
-            "3": self.modificar_cliente
+            "3": self.modificar_cliente,
+            "4": self.eliminar_cliente,
         }
     def mostrar_menu(self):
             print("""
@@ -21,6 +22,7 @@ Menú de la agenda:
 1. mostrar todos los clientes
 2. ingresar nuevo cliente
 3. modificar cliente
+4. eliminar cliente
 0. Salir
 """)
 
@@ -88,6 +90,16 @@ Menú de la agenda:
             else:
                 c = self.lista_clientes.modificar_cliente_particular(id_cliente, nombre, apellido, tel, mail)
             print("cliente modificado")
+
+    def eliminar_cliente(self):
+        """Solicita el id del contacto y elimina el contacto"""
+        id_cliente = int(input("ingrese el id del cliente"))
+        c = self.repoc.get_one(id_cliente)
+        if c == None:
+            print("el id es inexistente")
+        else:
+            self.repoc.delete(c)
+            print("contacto eliminado")
 
     def salir(self):
         """Sale del sistema"""
