@@ -51,9 +51,24 @@ class ListaTrabajos:
         return False
     
 
+    def modificar_trabajo(self, id_trabajo, fecha_ingreso, fecha_entrega_propuesta, descripcion ):
+        trabajo = self._buscar_por_id(id_trabajo)
+        if trabajo:
+            if descripcion == "":
+                descripcion = trabajo.descripcion
+            else:
+                trabajo.descripcion = descripcion
+            if fecha_entrega_propuesta == "":
+                fecha_entrega_propuesta = trabajo.fecha_entrega_propuesta
+            else:
+                trabajo.fecha_entrega_propuesta = fecha_entrega_propuesta
+            if fecha_ingreso == "":
+                fecha_ingreso = trabajo.fecha_ingreso
+            else:
+                trabajo.fecha_ingreso = fecha_ingreso
+            return self.rt.update(trabajo)
+        return None
 
-
-        
 
 
 

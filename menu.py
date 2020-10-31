@@ -26,6 +26,7 @@ class Menu:
             "8": self.retiro_trabajo,
             "9": self.eliminar_trabajo,
             "10": self.informe,
+            "11": self.modificar_trabajo,
             "0": self.salir
         }
     def mostrar_menu(self):
@@ -41,6 +42,7 @@ Menú de la agenda:
 8. entrega de trabajo
 9. cancelar un trabajo
 10. informe trabajos de un clinte.
+11. modificar trabajo
 0. Salir
 """)
 
@@ -56,6 +58,7 @@ Menú de la agenda:
                 print("{0} no es una opción válida".format(opcion))
 
     def mostrar_clientes(self, lista=None):
+        """muestra a todos los clientes"""
         if lista == None:
             lista = self.lista_clientes.lista
         for cliente in lista:
@@ -182,6 +185,24 @@ Menú de la agenda:
             for t in self.l_t.lista_t:
                 if t.cliente.id_cliente == id_cliente:
                    print (t)
+    def modificar_trabajo(self):
+        id_trabajo = int(input("ingrese el id del trabajo"))
+        c = self.repot.get_one(id_trabajo)
+        if c == None:
+            print("el id es inexistente")
+        else:
+            dia_i = int(input("ingrese el dia del ingreso: "))
+            mes_i = int(input("ingrese el mes del ingreso: "))
+            anio_i = int(input("ingrese el año del ingreso: "))
+            fecha_ingreso = datetime.date(anio_i, mes_i, dia_i)
+            dia = int(input("ingrese el dia de la entrega propuesta: "))
+            mes = int(input("ingrese el mes de la entrega propuesta: "))
+            anio = int(input("ingrese el año de la entrega propuesta: "))
+            fecha_entrega_propuesta = datetime.date(anio, mes, dia)
+            descripcion = input("Ingrese la nueva descripcion: ")
+
+            self.l_t.modificar_trabajo(id_trabajo,fecha_ingreso,fecha_entrega_propuesta,descripcion)
+
 
 
 
