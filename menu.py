@@ -13,12 +13,14 @@ class Menu:
         self.opciones = {
             "1": self.mostrar_clientes,
             "2": self.nuevo_cliente,
+            "3": self.modificar_cliente
         }
     def mostrar_menu(self):
             print("""
 Menú de la agenda:
 1. mostrar todos los clientes
 2. ingresar nuevo cliente
+3. modificar cliente
 0. Salir
 """)
 
@@ -60,6 +62,32 @@ Menú de la agenda:
             print("error al cargar cliente")
         else:
             print("cliente cargado")
+
+    def modificar_cliente(self):
+        """Solicita el id del contacto y modifica
+        los datos del cliente"""
+        id_cliente = int(input("ingrese el id del cliente: "))
+        c = self.repoc.get_one(id_cliente)
+        if c == None:
+            print("el id es inexistente")
+        else:
+            print("estos son los datos del cliente: ", c)
+            tipo = "A"
+            while tipo not in ("c", "C", "p", "P"):
+                tipo = input("ingrese el tipo de cliente: C=Corporativo/P=Particular")
+            nombre = input("ingrese el nombre: ")
+            if tipo in ("c", "C"):
+                contacto = input("ingrese nombre del contacto: ")
+                tc = input("ingrese el telefono del contacto: ")
+            else:
+                apellido = input("ingrese el apellido: ")
+            tel = input("ingrese el telefono: ")
+            mail = input("ingrese el mail: ")
+            if tipo in ("c", "C"):
+                c = self.lista_clientes.modificar_cliente_corporativo(id_cliente, nombre, contacto, tc, tel, mail)
+            else:
+                c = self.lista_clientes.modificar_cliente_particular(id_cliente, nombre, apellido, tel, mail)
+            print("cliente modificado")
 
     def salir(self):
         """Sale del sistema"""
