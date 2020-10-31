@@ -22,7 +22,7 @@ class Trabajo:
         cadena += f"entrega propuesta:{self.fecha_entrega_propuesta}\n"
         cadena += f"entrega real:{self.fecha_entrega_real}\n"
         cadena += f"descripcion:{self.descripcion}\n"
-        cadena += f"estado:{self.retirado}\n"
+        cadena += f"retirado:{self.retirado}\n"
         cadena += f"id: {self.id_trabajo}\n"
         return cadena
 

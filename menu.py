@@ -22,7 +22,7 @@ class Menu:
             "4": self.eliminar_cliente,
             "5": self.nuevo_trabajo,
             "6": self.mostrar_trabajos,
-            "7": self.finalizar_trabajo
+            "7": self.finalizar_trabajo,
 
             "0": self.salir
         }
@@ -100,9 +100,9 @@ Menú de la agenda:
             tel = input("ingrese el telefono: ")
             mail = input("ingrese el mail: ")
             if tipo in ("c", "C"):
-                c = self.lista_clientes.modificar_cliente_corporativo(id_cliente, nombre, contacto, tc, tel, mail)
+                self.lista_clientes.modificar_cliente_corporativo(id_cliente, nombre, contacto, tc, tel, mail)
             else:
-                c = self.lista_clientes.modificar_cliente_particular(id_cliente, nombre, apellido, tel, mail)
+                self.lista_clientes.modificar_cliente_particular(id_cliente, nombre, apellido, tel, mail)
             print("cliente modificado")
 
     def eliminar_cliente(self):
@@ -113,6 +113,7 @@ Menú de la agenda:
             print("el id es inexistente")
         else:
             self.repoc.delete(c)
+            self.lista_clientes.lista = self.repoc.get_all()
             print("contacto eliminado")
 
     def nuevo_trabajo(self):
@@ -138,7 +139,16 @@ Menú de la agenda:
         for trabajo in lista:
             print(trabajo)
             print("___________________________________________________")
-    
+
+    def finalizar_trabajo(self):
+        id_trabajo = int(input("ingrese el id del trabajo que desea finalizar: "))
+        x = self.repot.get_one(id_trabajo)
+        self.l_t.finalizar_trabajo(id_trabajo)
+        if x:
+            print("trabajo finalizado")
+        else:
+            print("trabajo no finalizado")
+
 
 
 
