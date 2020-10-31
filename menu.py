@@ -21,6 +21,8 @@ class Menu:
             "3": self.modificar_cliente,
             "4": self.eliminar_cliente,
             "5": self.nuevo_trabajo,
+            "6": self.mostrar_trabajos,
+            "7": self.finalizar_trabajo
 
             "0": self.salir
         }
@@ -32,7 +34,8 @@ Menú de la agenda:
 3. modificar cliente
 4. eliminar cliente
 5. cargar nuevo trabajo
-6. registrar trabajo finalizado
+6. mostrar trabajos
+7. finalizar trabajo
 0. Salir
 """)
 
@@ -127,6 +130,14 @@ Menú de la agenda:
             print("el trabajo no se cargo")
         else:
             print("trabajo cargado")
+
+    def mostrar_trabajos(self, lista=None ):
+        """muestra los trabajo asignado a los cliente correspondiente"""""
+        if lista == None:
+            lista = self.repot.get_all()
+        for trabajo in lista:
+            print(trabajo)
+            print("___________________________________________________")
     
 
 

@@ -18,11 +18,11 @@ class Trabajo:
         self.id_trabajo = id_trabajo
     def __str__(self):
         cadena = f"{self.cliente} \n"
-        cadena += f"ingeso: {fecha_ingreso}\n"
-        cadena += f"entrega propuesta:{fecha_entrega_propuesta}\n"
-        cadena += f"entrega real:{fecha_entrega_real}\n"
-        cadena += f"descripcion:{descripcion}\n"
-        cadena += f"estado:{retirado}\n"
-        cadena += f"id: {id_trabajo}\n"
+        cadena += f"ingeso: {self.fecha_ingreso}\n"
+        cadena += f"entrega propuesta:{self.fecha_entrega_propuesta}\n"
+        cadena += f"entrega real:{self.fecha_entrega_real}\n"
+        cadena += f"descripcion:{self.descripcion}\n"
+        cadena += f"estado:{self.retirado}\n"
+        cadena += f"id: {self.id_trabajo}\n"
         return cadena
 
