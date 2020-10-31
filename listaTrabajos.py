@@ -41,3 +41,14 @@ class ListaTrabajos:
             return True
         return False
 
+    def retiro_trabajo(self, id_trabajo):
+        trabajo = self._buscar_por_id(id_trabajo)
+        if trabajo:
+            trabajo.retirado = True
+            self.rt.update(trabajo)
+            self.lista_t = self.rt.get_all()
+            return True
+        return False
+
+
+

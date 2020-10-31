@@ -23,7 +23,7 @@ class Menu:
             "5": self.nuevo_trabajo,
             "6": self.mostrar_trabajos,
             "7": self.finalizar_trabajo,
-
+            "8": self.retiro_trabajo,
             "0": self.salir
         }
     def mostrar_menu(self):
@@ -36,6 +36,7 @@ Menú de la agenda:
 5. cargar nuevo trabajo
 6. mostrar trabajos
 7. finalizar trabajo
+8. entrega de trabajo
 0. Salir
 """)
 
@@ -148,6 +149,15 @@ Menú de la agenda:
             print("trabajo finalizado")
         else:
             print("trabajo no finalizado")
+
+    def retiro_trabajo(self):
+        id_trabajo = int(input("ingrese el id del trabajo que desea finalizar: "))
+        x = self.repot.get_one(id_trabajo)
+        self.l_t.retiro_trabajo(id_trabajo)
+        if x:
+            print("trabajo retirado")
+        else:
+            print("trabajo no retirado")
 
 
 
