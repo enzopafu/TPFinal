@@ -24,6 +24,8 @@ class Menu:
             "6": self.mostrar_trabajos,
             "7": self.finalizar_trabajo,
             "8": self.retiro_trabajo,
+            "9": self.eliminar_trabajo,
+            "10": self.informe,
             "0": self.salir
         }
     def mostrar_menu(self):
@@ -37,6 +39,8 @@ Menú de la agenda:
 6. mostrar trabajos
 7. finalizar trabajo
 8. entrega de trabajo
+9. cancelar un trabajo
+10. informe trabajos de un clinte.
 0. Salir
 """)
 
@@ -159,6 +163,25 @@ Menú de la agenda:
         else:
             print("trabajo no retirado")
 
+    def eliminar_trabajo(self):
+        id_trabajo = int(input("ingrese el id del trabajo"))
+        c = self.repot.get_one(id_trabajo)
+        if c == None:
+            print("el id es inexistente")
+        else:
+            self.repot.delete(c)
+            self.l_t.lista_t = self.repot.get_all()
+            print("trabajo eliminado")
+
+    def informe(self):
+        id_cliente = int(input("ingrese el id del cliente que desea ver su historial: "))
+        c = self.repoc.get_one(id_cliente)
+        if c == None:
+            print("el id es inexistente")
+        else:
+            for t in self.l_t.lista_t:
+                if t.cliente.id_cliente == id_cliente:
+                   print (t)
 
 
 

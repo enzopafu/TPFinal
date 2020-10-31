@@ -49,6 +49,13 @@ class ListaTrabajos:
             self.lista_t = self.rt.get_all()
             return True
         return False
+    
+
+
+
+        
+
+
 
 
 
